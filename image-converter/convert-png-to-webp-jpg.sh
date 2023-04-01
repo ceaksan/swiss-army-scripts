@@ -31,11 +31,24 @@ else
   exit 1
 fi
 
-# Get current directory
+# Prompt user for directory path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+echo "This script will convert all PNG files in the current directory to JPG and WebP format."
+echo "The converted files will be saved in the same directory as the original PNG files."
+echo "The current directory is $(DIR)"
+read -p "Do you want to continue with this directory or specify a different directory? (y/n)" -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  read -p "Enter the directory path where the PNG files are located: " -r DIR
+  if [[ ! -d "$DIR" ]]; then
+    echo "Directory not found. Aborting script."
+    exit 1
+  fi
+  cd "$DIR"
+fi
+
 # Check for PNG files
-PNG_FILES=($DIR/*.png)
+PNG_FILES=(*.png)
 if [ ${#PNG_FILES[@]} -eq 0 ]; then
     echo "No PNG files found in current directory."
     exit 1
@@ -59,10 +72,13 @@ for file in "${PNG_FILES[@]}"; do
     extension="${filename##*.}"
     filename="${filename%.*}"
     if [[ $(uname -s) == "Darwin" ]]; then
-      cwebp "$file" -quiet -o "${filename}.webp"
+      cwebp "$file" -quiet -o "${DIR}/${filename}.webp"
     fi
     convert "$file" "$DIR/$filename.jpg"
     convert "$file" "$DIR/$filename.webp"
 done
+
+convert "$file" "$DIR/$filename.jpg"
+convert "$file" "$DIR/$filename.webp"
 
 echo "PNG files converted to JPG and WEBP successfully."
