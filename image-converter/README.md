@@ -5,6 +5,8 @@ This is a simple bash script that converts all PNG files in a directory to WEBP 
 ## Usage
 You can run this script directly by typing ./convert-png-to-webp-jpg.sh in the terminal, assuming you have the required packages installed. Alternatively, you can use fig to run the script using the command fig run convert-png-to-webp-jpg.
 
+[![asciicast](https://asciinema.org/a/TCDTF7OZHfjM5yyS051ZCaXVr.svg)](https://asciinema.org/a/TCDTF7OZHfjM5yyS051ZCaXVr)
+
 ### Using fig
 fig is a tool that allows you to run scripts and automate tasks with Docker containers. If you do not have fig installed, you can install it by following the instructions here.
 
