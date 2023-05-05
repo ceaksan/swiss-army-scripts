@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/Users/ceaksan/miniconda/lib/python3.10/site-packages')
-
 from haralyzer import HarParser, HarPage
 import pandas as pd
 import matplotlib.pyplot as plt
